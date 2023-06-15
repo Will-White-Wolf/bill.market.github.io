@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>HWID Activation</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link rel="shortcut icon" href="favicon.ico">
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Microsoft Activation Scripts</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="faq.html">FAQ</a>
+</li>
+<li>
+  <a href="troubleshoot.html">Troubleshoot</a>
+</li>
+<li>
+  <a href="genuine-installation-media.html">Download Windows/Office</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Docs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hwid.html">HWID Activation</a>
+    </li>
+    <li>
+      <a href="kms38.html">KMS38 Activation</a>
+    </li>
+    <li>
+      <a href="online_kms.html">Online KMS Activation</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="command_line_switches.html">Command Line Switches</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="check_activation_status.html">Check Activation Status</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="oem-folder.html">Extract $OEM$ Folder</a>
+    </li>
+    <li>
+      <a href="change_edition.html">Change Edition</a>
+    </li>
+    <li>
+      <a href="install_hwid_key.html">Install HWID Key</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="bypass-russian-geoblock.html">Bypass Russian Geoblock</a>
+    </li>
+    <li>
+      <a href="office-license-is-not-genuine.html">Office License Is Not Genuine</a>
+    </li>
+    <li>
+      <a href="fix-wpa-registry.html">Fix WPA Registry</a>
+    </li>
+    <li>
+      <a href="licensing-servers-issue.html">Licensing Servers Issue</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="unsupported_products_activation.html">Unsupported Products Activation</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="changelog.html">Changelog</a>
+    </li>
+    <li>
+      <a href="credits.html">Credits</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="contactus.html">Contact Us</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="hwid-activation" class="section level1">
+<h1><strong>HWID Activation</strong></h1>
+<hr />
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<ul>
+<li><p>How to use it? Please find the instructions <a
+href="index.html#Download__How_to_use_it">here</a>.</p></li>
+<li><p>This activation is supported for Windows 10/11 only.</p></li>
+<li><p>This activation does not store or modify/patch any files in your
+system.</p></li>
+<li><p>This activation is a permanent activation for your system
+Hardware.</p></li>
+<li><p>On a system, this activation can be created for all the supported
+editions, and all can be linked to Microsoft account without any
+issues.</p></li>
+<li><p>Once a system is activated, this activation cannot be removed
+because the license is stored in the Microsoft servers and not in the
+user’s system. MS checks the hardware ID (HWID) and if a license is
+found in their database, the system will automatically activate. This is
+how official digital license works.</p></li>
+<li><p>Any significant changes in the Hardware (such as a motherboard)
+may deactivate the system. It is possible to reactivate a system that
+was deactivated because of significant hardware changes, IF your
+activation, was linked to an online Microsoft account.</p></li>
+<li><p>For activation to succeed, internet connectivity must be enabled.
+If you are trying to activate without these conditions being met, then
+the system will auto-activate later when the conditions are
+met.</p></li>
+<li><p>Auto activation scenario after the Windows re-install:</p>
+<ul>
+<li><p>The Internet is required. (Only at the time of
+activation)</p></li>
+<li><p>The system will auto-activate if Retail (Consumer) media was used
+for the installation.</p></li>
+<li><p>The system will NOT auto-activate if VL (Business) media was used
+for the installation. In this case, the user will have to insert that
+windows edition Retail/OEM key (find keys below on this page) to
+activate, if the user doesn’t wish to activate again using this
+script.</p></li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="how-does-it-work" class="section level2">
+<h2>How does it work?</h2>
+<ul>
+<li><p>In the official upgrade process from Windows 7 to Windows 10,
+Microsoft provides an HWID (digital license) activation for Windows 10
+without any cost.</p></li>
+<li><p>In the background, the upgrade process runs a file named
+gatherosstate.exe (available in Windows 10/11 ISO) and it checks the
+license of current Windows if found activated, it generates a valid
+GenuineTicket.xml <strong>ticket</strong> which is sent to Microsoft and
+in return, MS authorizes a license.</p></li>
+<li><p>So if we just convince the gatherosstate.exe file that the
+conditions are met for ticket generation by fooling it, it will generate
+a valid ticket, which can be used to get the valid HWID (Digital
+license).</p></li>
+<li><p>How to convince the gatherosstate.exe?<br />
+There are two methods for it.<br />
+<br />
+<strong>1-</strong> Place a <a
+href="https://github.com/Gamers-Against-Weed/Integrated_Patcher_3">custom
+slc.dll</a> file beside gatherosstate.exe:<br />
+gatherosstate.exe uses the system’s
+<code>C:\Windows\System32\slc.dll</code> file to gather the system’s
+info. If we place a custom slc.dll file beside gatherosstate.exe which
+can send the rubbish data to it, then it will simply accept it and
+generate a valid ticket.<br />
+<br />
+<strong>2-</strong> <a
+href="https://github.com/Gamers-Against-Weed/GamersOsState">Modify</a>
+the gatherosstate.exe file itself so that it doesn’t check the system’s
+activation status and can directly create a valid ticket.</p></li>
+<li><p><strong>Notes:</strong></p>
+<ul>
+<li>To be clear, we are <strong>not modifying/patching any on-board
+system file</strong> to get digital license. Gatherosstate.exe is a part
+of ISO file and not available in C drive system files. System’s slc.dll
+file is not touched, instead we use custom slc.dll only for a brief
+moment of ticket generation.</li>
+<li>If you want to understand more about how these above mentioned both
+methods then check this repo <a
+href="https://github.com/massgravel/MAS-Legacy-Methods">MAS-Legacy-Methods</a></li>
+<li>Latest MAS doesn’t use any of these methods, instead it uses ready
+to use Universal tickets (check below for info).</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="types-of-tickets" class="section level2">
+<h2>Types of Tickets</h2>
+<p>There are many methods for ticket generation, majorly we can classify
+the ticket types in 3 categories.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Downlevel Ticket</strong> - This is the simplest ticket
+generation process. In this method, ticket is signed by downlevel key by
+the system and the ticket’s OSVersion is =&lt;10. If it’s generated on
+Windows 10/11 then MS ideally aren’t supposed to grant activation,
+however they do and method is continuously working from last 4-5 years.
+Almost every HWID activator (at the time of writing this) is based on
+this method.</p></li>
+<li><p><strong>Lockbox Ticket</strong> - This is slightly a trickier
+method. The ticket is signed by Lockbox key by the system and the
+ticket’s OSVersion is 10. This ticket generation process involves
+cleaning Clipsvc licenses and IdentityCRL registry key in the system.
+Due to some hiccups in the process, this method is not primarily used in
+MAS, however these are the types of tickets that are identical to the
+genuine ticket generated by system on activated Windows 10/11.</p></li>
+<li><p><strong>Universal Ticket</strong> - In this method, we set the
+OSVersion =&lt;5 in the ticket and when we apply the ticket, system
+ignores the HWID in the ticket due to lower OSVersion and grant the
+activation anyway. This ticket can be applied on any system. These
+tickets can either be Downlevel or Lockbox type. MS ideally aren’t
+supposed to grant activation, however they do.</p></li>
+</ol>
+<p>Latest version of MAS is using Universal ticket method. Other ticket
+method scripts can be found in this repo <a
+href="https://github.com/massgravel/MAS-Legacy-Methods">MAS-Legacy-Methods</a></p>
+<p>Now a question, can Microsoft block the new requests or revoke
+already established HWID license?</p>
+<ul>
+<li>Revoking the license would be too extreme and will face many
+complications and risk of voiding valid licenses. However maybe they can
+block the new activation requests coming from Downlevel and Universal
+tickets. But the tools are working from 4-5 years and they don’t seem to
+care much for consumer piracy; That’s not where they get the most money
+from.</li>
+</ul>
+<hr />
+</div>
+<div id="supported-products" class="section level2">
+<h2>Supported Products</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Windows 10/11</th>
+<th align="left">Generic Retail/OEM/MAK Key</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Education</td>
+<td align="left"><code>YNMGQ-8RYV3-4PGQ3-C8XTP-7CFBY</code></td>
+</tr>
+<tr class="even">
+<td align="left">Education N</td>
+<td align="left"><code>84NGF-MHBT6-FXBX8-QWJK7-DRR8H</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Enterprise</td>
+<td align="left"><code>XGVPP-NMH47-7TTHJ-W3FW7-8HV2C</code></td>
+</tr>
+<tr class="even">
+<td align="left">Enterprise N</td>
+<td align="left"><code>3V6Q6-NQXCX-V8YXR-9QCYV-QPFCT</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Enterprise LTSB 2015</td>
+<td align="left"><code>FWN7H-PF93Q-4GGP8-M8RF3-MDWWW</code></td>
+</tr>
+<tr class="even">
+<td align="left">Enterprise LTSB 2016</td>
+<td align="left"><code>NK96Y-D9CD8-W44CQ-R8YTK-DYJWX</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Enterprise LTSC 2019</td>
+<td align="left"><code>43TBQ-NH92J-XKTM7-KT3KK-P39PB</code></td>
+</tr>
+<tr class="even">
+<td align="left">Enterprise N LTSB 2015</td>
+<td align="left"><code>NTX6B-BRYC2-K6786-F6MVQ-M7V2X</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Enterprise N LTSB 2016</td>
+<td align="left"><code>2DBW3-N2PJG-MVHW3-G7TDK-9HKR4</code></td>
+</tr>
+<tr class="even">
+<td align="left">Home</td>
+<td align="left"><code>YTMG3-N6DKC-DKB77-7M9GH-8HVX7</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Home N</td>
+<td align="left"><code>4CPRK-NM3K3-X6XXQ-RXX86-WXCHW</code></td>
+</tr>
+<tr class="even">
+<td align="left">Home China</td>
+<td align="left"><code>N2434-X9D7W-8PF6X-8DV9T-8TYMD</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Home Single Language</td>
+<td align="left"><code>BT79Q-G7N6G-PGBYW-4YWX6-6F4BT</code></td>
+</tr>
+<tr class="even">
+<td align="left">IoT Enterprise</td>
+<td align="left"><code>XQQYW-NFFMW-XJPBH-K8732-CKFFD</code></td>
+</tr>
+<tr class="odd">
+<td align="left">IoT Enterprise LTSC 2021</td>
+<td align="left"><code>QPM6N-7J2WJ-P88HH-P3YRH-YY74H</code></td>
+</tr>
+<tr class="even">
+<td align="left">IoT Enterprise LTSC Subscription</td>
+<td align="left"><code>J7NJW-V6KBM-CC8RW-Y29Y4-HQ2MJ</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Pro</td>
+<td align="left"><code>VK7JG-NPHTM-C97JM-9MPGT-3V66T</code></td>
+</tr>
+<tr class="even">
+<td align="left">Pro N</td>
+<td align="left"><code>2B87N-8KFHP-DKV6R-Y2C8J-PKCKT</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Pro Education</td>
+<td align="left"><code>8PTT6-RNW4C-6V7J2-C2D3X-MHBPB</code></td>
+</tr>
+<tr class="even">
+<td align="left">Pro Education N</td>
+<td align="left"><code>GJTYN-HDMQY-FRR76-HVGC7-QPF8P</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Pro for Workstations</td>
+<td align="left"><code>DXG7C-N36C4-C4HTG-X4T3X-2YV77</code></td>
+</tr>
+<tr class="even">
+<td align="left">Pro N for Workstations</td>
+<td align="left"><code>WYPNQ-8C467-V2W6J-TX4WX-WT2RQ</code></td>
+</tr>
+<tr class="odd">
+<td align="left">S</td>
+<td align="left"><code>V3WVW-N2PV2-CGWC3-34QGF-VMJ2C</code></td>
+</tr>
+<tr class="even">
+<td align="left">S N</td>
+<td align="left"><code>NH9J3-68WK7-6FB93-4K3DF-DJ4F6</code></td>
+</tr>
+<tr class="odd">
+<td align="left">SE</td>
+<td align="left"><code>KY7PN-VR6RX-83W6Y-6DDYQ-T6R4W</code></td>
+</tr>
+<tr class="even">
+<td align="left">SE N</td>
+<td align="left"><code>K9VKN-3BGWV-Y624W-MCRMQ-BHDCD</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Team</td>
+<td align="left"><code>XKCNC-J26Q9-KFHD2-FKTHY-KD72Y</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes:</strong></p>
+<ul>
+<li><p>X86-X64 and ARM64 architecture systems are supported.</p></li>
+<li><p>Any Evaluation version of Windows (i.e. ‘EVAL’ LTSB/C) cannot be
+activated.</p></li>
+<li><p>IoTEnterpriseS (LTSC) 2021 key will be used to activate the
+unsupported EnterpriseS (LTSC) 2021 edition.</p></li>
+<li><p>Windows Server does not support HWID activation.</p></li>
+<li><p>ServerRdsh edition does not <a
+href="https://learn.microsoft.com/en-us/azure/virtual-desktop/windows-10-multisession-faq">officially</a>
+support activation on non-azure systems.</p></li>
+</ul>
+<hr />
+</div>
+<div id="how-to-remove-hwid" class="section level2">
+<h2>How to remove HWID?</h2>
+<ul>
+<li>You can not remove it, same as you can not remove official Windows
+digital (HWID) license. Once a system is activated, this activation
+cannot be removed because the license is stored in the Microsoft servers
+and not in the user’s system. MS checks the hardware ID (HWID) and if a
+license is found in their database, the system will automatically
+activate.</li>
+</ul>
+<hr />
+</div>
+<div id="command-line-switches" class="section level2">
+<h2>Command line Switches</h2>
+<ul>
+<li>Check <a href="command_line_switches.html">here</a>.</li>
+</ul>
+<hr />
+</div>
+<div id="manual-activation" class="section level2">
+<h2>Manual Activation</h2>
+<p>This is for those who wants to perform manual activation. If you want
+a tool to do this for you then check <a href="index.html">here</a>.</p>
+<p>We can divide the manual activation process into two parts.</p>
+<div id="from-ready-made-ticket" class="section level3">
+<h3>1- From Ready-Made Ticket</h3>
+<ul>
+<li><p>Make sure the Internet is enabled.</p></li>
+<li><p>Open Windows Powershell as administrator, and enter the following
+listed commands in the sequence in which they are given.</p></li>
+<li><p>Enter the Key, (Replace <code>&lt;key&gt;</code> with the key
+from the above list) with the following command</p></li>
+</ul>
+<p><code>slmgr /ipk &lt;key&gt;</code></p>
+<ul>
+<li><p>Download Universal tickets from <a
+href="https://www.box.com/index.php?rm=box_download_shared_file&amp;shared_name=p9zvmu4tnogv4nkn01kpyvkndfzhhiv4&amp;file_id=f_1171245497490">here</a>
+and extract the downloaded file.</p></li>
+<li><p>Now enter below code in Powershell</p></li>
+</ul>
+<p><code>(Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\ProductOptions).OSProductPfn</code></p>
+<ul>
+<li><p>This command will you show you some text like
+<code>Microsoft.Windows.48.X19-98841_8wekyb3d8bbwe</code></p></li>
+<li><p>You need to find the exact same name ticket file in the folder
+which you have extracted earlier.</p></li>
+<li><p>Copy that ticket file and paste it in the below folder</p>
+<p><code>C:\ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket</code></p></li>
+<li><p>Now run below command in Powershell to apply the ticket</p></li>
+</ul>
+<p><code>clipup -v -o</code></p>
+<ul>
+<li>Activate Windows with the following command</li>
+</ul>
+<p><code>slmgr /ato</code></p>
+<ul>
+<li>Check Activation Status with the following command</li>
+</ul>
+<p><code>slmgr /xpr</code></p>
+<ul>
+<li>Done.</li>
+</ul>
+<hr />
+</div>
+<div id="from-scratch" class="section level3">
+<h3>2- From Scratch</h3>
+<p>In this process we will perform activation from scratch. This is
+based on Universal ticket method. Here we will create identical tickets
+which are used in MAS HWID script and activate the system with it.</p>
+<ul>
+<li><p>Download file from the below official MS link and extract this
+.cab file.<br />
+<a
+href="https://download.microsoft.com/download/9/A/E/9AE69DD5-BA93-44E0-864E-180F5E700AB4/adk/Installers/14f4df8a2a7fc82a4f415cf6a341415d.cab"
+class="uri">https://download.microsoft.com/download/9/A/E/9AE69DD5-BA93-44E0-864E-180F5E700AB4/adk/Installers/14f4df8a2a7fc82a4f415cf6a341415d.cab</a></p></li>
+<li><p>Find the file named
+<code>filf8377e82b29deadca67bc4858ed3fba9</code> and rename it as
+<code>gatherosstate.exe</code></p></li>
+<li><p>Make a folder named <code>Files</code> in C drive,
+<code>C:\Files</code> and copy the <code>gatherosstate.exe</code> file
+in that folder.</p></li>
+<li><p>Make sure the Internet is enabled.</p></li>
+<li><p>Open Windows Powershell as administrator, and enter the following
+listed commands in the sequence in which they are given.</p></li>
+<li><p>Enter the Key, (Replace <code>&lt;key&gt;</code> with the key
+from the above list) with the following command</p></li>
+</ul>
+<p><code>slmgr /ipk &lt;key&gt;</code></p>
+<ul>
+<li>Copy the below code all at once and enter it in PowerShell to modify
+the <code>gatherosstate.exe</code> file. This code to modify the file is
+based on <a
+href="https://github.com/Gamers-Against-Weed/GamersOsState">GamersOsState</a>.</li>
+</ul>
+<!-- -->
+<pre><code>$bytes  = [System.IO.File]::ReadAllBytes(&quot;C:\Files\gatherosstate.exe&quot;)
+$bytes[320] = 0xf8
+$bytes[321] = 0xfb
+$bytes[322] = 0x05
+$bytes[324] = 0x03
+$bytes[13672] = 0x25
+$bytes[13674] = 0x73
+$bytes[13676] = 0x3b
+$bytes[13678] = 0x00
+$bytes[13680] = 0x00
+$bytes[13682] = 0x00
+$bytes[13684] = 0x00
+$bytes[32748] = 0xe9
+$bytes[32749] = 0x9e
+$bytes[32750] = 0x00
+$bytes[32751] = 0x00
+$bytes[32752] = 0x00
+$bytes[32894] = 0x8b
+$bytes[32895] = 0x44
+$bytes[32897] = 0x64
+$bytes[32898] = 0x85
+$bytes[32899] = 0xc0
+$bytes[32900] = 0x0f
+$bytes[32901] = 0x85
+$bytes[32902] = 0x1c
+$bytes[32903] = 0x02
+$bytes[32904] = 0x00
+$bytes[32906] = 0xe9
+$bytes[32907] = 0x3c
+$bytes[32908] = 0x01
+$bytes[32909] = 0x00
+$bytes[32910] = 0x00
+$bytes[32911] = 0x85
+$bytes[32912] = 0xdb
+$bytes[32913] = 0x75
+$bytes[32914] = 0xeb
+$bytes[32915] = 0xe9
+$bytes[32916] = 0x69
+$bytes[32917] = 0xff
+$bytes[32918] = 0xff
+$bytes[32919] = 0xff
+$bytes[33094] = 0xe9
+$bytes[33095] = 0x80
+$bytes[33096] = 0x00
+$bytes[33097] = 0x00
+$bytes[33098] = 0x00
+$bytes[33449] = 0x64
+$bytes[33576] = 0x8d
+$bytes[33577] = 0x54
+$bytes[33579] = 0x24
+$bytes[33580] = 0xe9
+$bytes[33581] = 0x55
+$bytes[33582] = 0x01
+$bytes[33583] = 0x00
+$bytes[33584] = 0x00
+$bytes[33978] = 0xc3
+$bytes[34189] = 0x59
+$bytes[34190] = 0xeb
+$bytes[34191] = 0x28
+$bytes[34238] = 0xe9
+$bytes[34239] = 0x4f
+$bytes[34240] = 0x00
+$bytes[34241] = 0x00
+$bytes[34242] = 0x00
+$bytes[34346] = 0x24
+$bytes[34376] = 0xeb
+$bytes[34377] = 0x63
+[System.IO.File]::WriteAllBytes(&quot;C:\Files\gatherosstatemodified.exe&quot;, $bytes)</code></pre>
+<ul>
+<li>Now right click on the file <code>gatherosstatemodified.exe</code>
+and goto properties and set the compatibility to Windows XP SP3.<br />
+</li>
+<li>Now we need to generate the ticket, to do that, enter the below
+command.</li>
+</ul>
+<!-- -->
+<pre><code>$value = (Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\ProductOptions).OSProductPfn
+
+C:\Files\gatherosstatemodified.exe /c Pfn=$value`;DownlevelGenuineState=1</code></pre>
+<ul>
+<li>A GenuineTicket.xml file should be created in the folder
+<code>C:\Files\</code> now let’s apply it.</li>
+</ul>
+<p><code>clipup -v -o -altto C:\Files\</code></p>
+<ul>
+<li>Activate Windows with the following command</li>
+</ul>
+<p><code>slmgr /ato</code></p>
+<ul>
+<li>Check Activation Status with the following command</li>
+</ul>
+<p><code>slmgr /xpr</code></p>
+<ul>
+<li>Done.</li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ul>
+<li><p>If the system is already activated then created ticket will be a
+Lockbox ticket and if not then it will be a Downlevel ticket.</p></li>
+<li><p>To make the exact ticket used in MAS HWID script, make sure
+system is already activated and fix the time with below Powershell
+command and then initiate the ticket generation process as per above
+mentioned steps.<br />
+<code>$date=[datetime]"2022/10/11 12:00";while($true){set-date $date; start-sleep -milliseconds 10}</code></p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="setup-preactivate" class="section level2">
+<h2>Setup Preactivate</h2>
+<ul>
+<li><p>Check the Extract OEM option in the MAS <code>Extras</code>
+section if you want pre-activated Windows installation.</p></li>
+<li><p>Further, read <a href="oem-folder.html">here</a>.</p></li>
+</ul>
+<hr />
+</div>
+<div id="troubleshooting" class="section level2">
+<h2>Troubleshooting</h2>
+<ul>
+<li>Check <a href="troubleshoot.html">here</a>.</li>
+</ul>
+</div>
+</div>
+
+<script type="text/javascript" src="links.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

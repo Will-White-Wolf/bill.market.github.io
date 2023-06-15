@@ -11,7 +11,7 @@
 
 
 
-<title>Microsoft Activation Scripts</title>
+<title>Licensing Servers Issue</title>
 
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -405,120 +405,90 @@ div.tocify {
 </div>
 
 
-<div id="intro" class="section level2">
-<h2>Intro</h2>
-<p><strong>Microsoft Activation Scripts (MAS)</strong></p>
-<p>A Windows and Office activator using HWID / KMS38 / Online KMS
-activation methods, with a focus on open-source code and fewer antivirus
-detections.</p>
+<div id="licensing-servers-issue" class="section level1">
+<h1>Licensing Servers Issue</h1>
 <hr />
-</div>
-<div id="features" class="section level2">
-<h2>Features</h2>
 <ul>
-<li>HWID Activation</li>
-<li>KMS38 Activation</li>
-<li>Online KMS Activation</li>
-<li>Activation Troubleshoot</li>
-<li>$OEM$ Folders For Preactivation</li>
-<li>Change Windows Edition</li>
-<li>Check Windows-Office Activation Status</li>
-<li>Available in All In One &amp; Separate Files Version</li>
-<li>Fully Open Source</li>
-<li>All Files Are Transparent Batch Scripts</li>
-<li>Fewer Antivirus Detections</li>
+<li><p>In some cases, <strong>HWID activation</strong> may fail because
+system couldn’t connect to HWID licensing servers.</p></li>
+<li><p>Activation script will inform you about this if that is the case.
+We suggest to follow the below guide only when the script tells you to
+do it. If you are unsure, you can take the help from <a
+href="troubleshoot.html">here</a>.</p></li>
+<li><p>This may happen mostly either due to DNS or Issues in MS
+licensing servers itself or Firewall rules in the system. Below you can
+find listed fixes for it.</p></li>
+<li><p><strong>Which method to choose for the fix?<br />
+<br />
+</strong>If you are located in China then choose <strong>Modify Host
+File</strong> option.<br />
+If you are not in China then first try <strong>Fix DNS</strong> option,
+and if that doesn’t work then try <strong>VPN</strong> method or try
+another Internet connection.</p></li>
+<li><p>If you are still facing issues then check <a
+href="troubleshoot.html">here</a>.</p></li>
+</ul>
+<hr />
+<div id="fix-dns" class="section level2">
+<h2>Fix DNS</h2>
+<ul>
+<li><p>Download the <code>Fix_DNS.zip</code> file from <a
+href="https://www.box.com/index.php?rm=box_download_shared_file&amp;shared_name=4c66hw8ezuijy5j0trwczy860sf825i7&amp;file_id=f_1146300205040">here</a>.</p></li>
+<li><p>Extract the zip file and right click on <code>Fix_DNS.cmd</code>
+file and run it as admin.</p></li>
+<li><p>Follow onscreen instructions.</p></li>
+<li><p>Once done, try HWID Activation.</p></li>
 </ul>
 <hr />
 </div>
-<div id="mas-latest-release" class="section level2">
-<h2>MAS Latest Release</h2>
-<p>Last Release - v1.8 (16-Mar-2023)<br />
-<a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts">GitHub</a>
-/ <a
-href="https://gitlab.com/massgrave/microsoft-activation-scripts">GitLab</a></p>
-<hr />
-</div>
-<div id="download-how-to-use-it" class="section level2">
-<h2>Download / How to use it?</h2>
-<div id="method-1---powershell" class="section level3">
-<h3>Method 1 - PowerShell</h3>
-<p>(Recommended)</p>
+<div id="vpn" class="section level2">
+<h2>VPN</h2>
 <ul>
-<li>On Windows 8.1/10/11, right-click on the windows start menu and
-select PowerShell or Terminal (Not CMD).</li>
-<li>Copy-paste the below code and press enter<br />
-<code>irm https://massgrave.dev/get | iex</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
+<li><p>You can install either of the below VPN to fix issue if script is
+showing failed to connect licensing servers.</p></li>
+<li><p>Cloudflare WARP - <a href="https://1.1.1.1/"
+class="uri">https://1.1.1.1/</a></p></li>
+<li><p>Psiphon - <a href="https://psiphon.ca/"
+class="uri">https://psiphon.ca/</a></p></li>
+<li><p>Once done, try HWID Activation.</p></li>
 </ul>
+<hr />
 </div>
-<div id="method-2---traditional" class="section level3">
-<h3>Method 2 - Traditional</h3>
+<div id="modify-host-file" class="section level2">
+<h2>Modify Host File</h2>
+<p>Around 8 Feb 2023 in China, MS licensing servers failed to properly
+connect and it disrupted many Windows services including activation.
+Solution to this issue is to simply hardcode another country’s MS
+licensing servers IP in hosts file and Windows will use that for
+activation. This method can also be used if for any reason DNS is
+failing to resolve MS licensing servers.</p>
 <ul>
-<li>Download the file from <a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip">here</a></li>
-<li>Right click on the downloaded zip file and extract</li>
-<li>In the extracted folder, find the folder named
-<code>All-In-One-Version</code></li>
-<li>Run the file named <code>MAS_AIO.cmd</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
+<li><p>Open Powershell or Terminal as admin (don’t open CMD).</p></li>
+<li><p>Copy paste below lines and press enter,</p></li>
 </ul>
-<p>To run the scripts in unattended mode, check <a
-href="command_line_switches.html">here</a></p>
+<!-- -->
+<pre><code>$filePath = &quot;C:\Windows\System32\drivers\etc\hosts&quot;
+
+Set-ItemProperty -Path $filePath -Name IsReadOnly -Value $false
+
+Set-Content -Path $filePath -Value (Get-Content $filePath | ForEach-Object { $_ -replace &quot;124.108.22.138 licensing.mp.microsoft.com&quot;, &quot;&quot; })
+
+Add-Content -Path $filePath -Value &quot;124.108.22.138 licensing.mp.microsoft.com&quot;
+
+Set-ItemProperty -Path $filePath -Name IsReadOnly -Value $true</code></pre>
+<ul>
+<li>Done. Now try HWID Activation.</li>
+</ul>
+<p>To restore it, run below commands.</p>
+<pre><code>$filePath = &quot;C:\Windows\System32\drivers\etc\hosts&quot;
+
+Set-ItemProperty -Path $filePath -Name IsReadOnly -Value $false
+
+Set-Content -Path $filePath -Value (Get-Content $filePath | ForEach-Object { $_ -replace &quot;124.108.22.138 licensing.mp.microsoft.com&quot;, &quot;&quot; })
+
+Set-ItemProperty -Path $filePath -Name IsReadOnly -Value $true</code></pre>
 <hr />
 </div>
-</div>
-<div id="activations-summary" class="section level2">
-<h2>Activations Summary</h2>
-<table>
-<colgroup>
-<col width="19%" />
-<col width="25%" />
-<col width="55%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Activation Type</th>
-<th align="left">Supported Product</th>
-<th align="left">Activation Period</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">HWID</td>
-<td align="left">Windows 10-11</td>
-<td align="left">Permanent</td>
-</tr>
-<tr class="even">
-<td align="left">KMS38</td>
-<td align="left">Windows 10-11-Server</td>
-<td align="left">Until the year 2038</td>
-</tr>
-<tr class="odd">
-<td align="left">Online KMS</td>
-<td align="left">Windows / Office</td>
-<td align="left">180 Days. Lifetime Activation With Renewal Task</td>
-</tr>
-</tbody>
-</table>
-<p>For more details, use the respective activation details in Doc.</p>
-<p>To activate unsupported products such as <strong>Office on
-Mac</strong>, check <a
-href="unsupported_products_activation.html">here</a>.</p>
-<hr />
-</div>
-<div id="screenshots" class="section level2">
-<h2>Screenshots</h2>
-<p><img src="MAS_AIO.png" /></p>
-<p><img src="MAS_HWID.png" /></p>
-<p><img src="MAS_KMS.png" /></p>
-<p><img src="MAS_Troubleshoot.png" /></p>
-<hr />
-<p>Made with Love ❤️</p>
 </div>
 
 <script type="text/javascript" src="links.js"></script>

@@ -11,7 +11,7 @@
 
 
 
-<title>Microsoft Activation Scripts</title>
+<title>Command Line Switches</title>
 
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -405,120 +405,154 @@ div.tocify {
 </div>
 
 
-<div id="intro" class="section level2">
-<h2>Intro</h2>
-<p><strong>Microsoft Activation Scripts (MAS)</strong></p>
-<p>A Windows and Office activator using HWID / KMS38 / Online KMS
-activation methods, with a focus on open-source code and fewer antivirus
-detections.</p>
+<div id="command-line-switches" class="section level1">
+<h1>Command Line Switches</h1>
 <hr />
-</div>
-<div id="features" class="section level2">
-<h2>Features</h2>
+<div id="switches-list" class="section level2">
+<h2>Switches List</h2>
 <ul>
-<li>HWID Activation</li>
-<li>KMS38 Activation</li>
-<li>Online KMS Activation</li>
-<li>Activation Troubleshoot</li>
-<li>$OEM$ Folders For Preactivation</li>
-<li>Change Windows Edition</li>
-<li>Check Windows-Office Activation Status</li>
-<li>Available in All In One &amp; Separate Files Version</li>
-<li>Fully Open Source</li>
-<li>All Files Are Transparent Batch Scripts</li>
-<li>Fewer Antivirus Detections</li>
+<li><p>You can use the below switches in MAS AIO, separate files version
+and in Powershell one-liner to run in unattended mode.</p></li>
+<li><p>If you want to use it in Windows Pre-Activation then check <a
+href="oem-folder.html">this</a> page for more details.</p></li>
 </ul>
-<hr />
-</div>
-<div id="mas-latest-release" class="section level2">
-<h2>MAS Latest Release</h2>
-<p>Last Release - v1.8 (16-Mar-2023)<br />
-<a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts">GitHub</a>
-/ <a
-href="https://gitlab.com/massgrave/microsoft-activation-scripts">GitLab</a></p>
-<hr />
-</div>
-<div id="download-how-to-use-it" class="section level2">
-<h2>Download / How to use it?</h2>
-<div id="method-1---powershell" class="section level3">
-<h3>Method 1 - PowerShell</h3>
-<p>(Recommended)</p>
-<ul>
-<li>On Windows 8.1/10/11, right-click on the windows start menu and
-select PowerShell or Terminal (Not CMD).</li>
-<li>Copy-paste the below code and press enter<br />
-<code>irm https://massgrave.dev/get | iex</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
-</ul>
-</div>
-<div id="method-2---traditional" class="section level3">
-<h3>Method 2 - Traditional</h3>
-<ul>
-<li>Download the file from <a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip">here</a></li>
-<li>Right click on the downloaded zip file and extract</li>
-<li>In the extracted folder, find the folder named
-<code>All-In-One-Version</code></li>
-<li>Run the file named <code>MAS_AIO.cmd</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
-</ul>
-<p>To run the scripts in unattended mode, check <a
-href="command_line_switches.html">here</a></p>
-<hr />
-</div>
-</div>
-<div id="activations-summary" class="section level2">
-<h2>Activations Summary</h2>
 <table>
 <colgroup>
-<col width="19%" />
-<col width="25%" />
-<col width="55%" />
+<col width="31%" />
+<col width="68%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">Activation Type</th>
-<th align="left">Supported Product</th>
-<th align="left">Activation Period</th>
+<th>Switches</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">HWID</td>
-<td align="left">Windows 10-11</td>
-<td align="left">Permanent</td>
+<td><code>/HWID</code></td>
+<td>Activate with HWID</td>
 </tr>
 <tr class="even">
-<td align="left">KMS38</td>
-<td align="left">Windows 10-11-Server</td>
-<td align="left">Until the year 2038</td>
+<td><code>/HWID-NoEditionChange</code></td>
+<td>Don’t change edition if not supported by HWID</td>
 </tr>
 <tr class="odd">
-<td align="left">Online KMS</td>
-<td align="left">Windows / Office</td>
-<td align="left">180 Days. Lifetime Activation With Renewal Task</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>/KMS38</code></td>
+<td>Activate with KMS38</td>
+</tr>
+<tr class="odd">
+<td><code>/KMS38-RemoveProtection</code></td>
+<td>Remove KMS38 protection</td>
+</tr>
+<tr class="even">
+<td><code>/KMS38-NoEditionChange</code></td>
+<td>Don’t change edition if not supported by KMS38</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>/KMS-Windows</code></td>
+<td>Activate Windows with Online KMS</td>
+</tr>
+<tr class="odd">
+<td><code>/KMS-Office</code></td>
+<td>Activate Office with Online KMS</td>
+</tr>
+<tr class="even">
+<td><code>/KMS-WindowsOffice</code></td>
+<td>Activate Windows &amp; Office with Online KMS</td>
+</tr>
+<tr class="odd">
+<td><code>/KMS-RenewalTask</code></td>
+<td>Install Online KMS renewal task</td>
+</tr>
+<tr class="even">
+<td><code>/KMS-ActAndRenewalTask</code></td>
+<td>Install Online KMS activation &amp; renewal tasks (Use this)</td>
+</tr>
+<tr class="odd">
+<td><code>/KMS-Uninstall</code></td>
+<td>Uninstall Online KMS</td>
+</tr>
+<tr class="even">
+<td><code>/KMS-KeepvNext</code></td>
+<td>Don’t override Office C2R vNext license</td>
+</tr>
+<tr class="odd">
+<td><code>/KMS-Debug</code></td>
+<td>Create Debug log in Online KMS Activation</td>
+</tr>
+<tr class="even">
+<td><code>/KMS-Logger</code></td>
+<td>Create simple log in Online KMS Activation</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>/Insert-HWID-Key</code></td>
+<td>Insert Windows HWID key</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>/S</code></td>
+<td>Run operations in silent mode (no output)</td>
 </tr>
 </tbody>
 </table>
-<p>For more details, use the respective activation details in Doc.</p>
-<p>To activate unsupported products such as <strong>Office on
-Mac</strong>, check <a
-href="unsupported_products_activation.html">here</a>.</p>
 <hr />
 </div>
-<div id="screenshots" class="section level2">
-<h2>Screenshots</h2>
-<p><img src="MAS_AIO.png" /></p>
-<p><img src="MAS_HWID.png" /></p>
-<p><img src="MAS_KMS.png" /></p>
-<p><img src="MAS_Troubleshoot.png" /></p>
+<div id="uses-in-powershell-one-liner" class="section level2">
+<h2>Uses In Powershell One Liner</h2>
+<p><code>&amp; ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /para</code></p>
+<ul>
+<li>Replace <code>/para</code> in this command with the switches from
+the above table. You can use multiple switches. For example, if you want
+to activate Windows and Office both with the best method possible then
+use,</li>
+</ul>
+<p><code>&amp; ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /HWID /KMS38 /KMS-WindowsOffice /KMS-ActAndRenewalTask</code></p>
+<p>If you just want to activate Windows with HWID and Office with KMS
+then,</p>
+<p><code>&amp; ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /HWID /KMS-Office /KMS-ActAndRenewalTask</code></p>
+<p>If you just wants to activate Windows with HWID then,</p>
+<p><code>&amp; ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /HWID</code></p>
+<p><strong>Note:</strong> This Powershell one liner will work on Windows
+8 and later versions only.</p>
 <hr />
-<p>Made with Love ❤️</p>
+</div>
+<div id="rules" class="section level2">
+<h2>Rules</h2>
+<ul>
+<li><p>Script will run in unattended mode if any switch is
+used.</p></li>
+<li><p><code>/S</code> switch is not applicable in MAS separate files
+version scripts.</p></li>
+<li><p>All switches are case-insensitive, works in any order, but must
+be separated with spaces.</p></li>
+<li><p>KMS Uninstall switch will take precedence over other KMS
+switches.</p></li>
+<li><p>KMS38 remove protection switch will task precedence over KMS38
+activation.</p></li>
+</ul>
+<hr />
+</div>
+<div id="need-help" class="section level2">
+<h2>Need help?</h2>
+<ul>
+<li>Check <a href="troubleshoot.html">here</a>.</li>
+</ul>
+</div>
 </div>
 
 <script type="text/javascript" src="links.js"></script>

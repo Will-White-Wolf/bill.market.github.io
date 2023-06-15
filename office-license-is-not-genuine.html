@@ -11,7 +11,7 @@
 
 
 
-<title>Microsoft Activation Scripts</title>
+<title>Get genuine Office banner</title>
 
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -405,120 +405,122 @@ div.tocify {
 </div>
 
 
-<div id="intro" class="section level2">
-<h2>Intro</h2>
-<p><strong>Microsoft Activation Scripts (MAS)</strong></p>
-<p>A Windows and Office activator using HWID / KMS38 / Online KMS
-activation methods, with a focus on open-source code and fewer antivirus
-detections.</p>
+<div id="get-genuine-office-banner" class="section level1">
+<h1>‘Get genuine Office’ banner</h1>
+<p><img src="office-license-is-not-genuine.png" /></p>
+<p><strong>TL;DR</strong> To solve it, use the latest abbodi1406’s <a
+href="https://github.com/abbodi1406/KMS_VL_ALL_AIO/">KMS_VL_ALL</a> or
+<a href="index.html">MAS</a> to activate Office.</p>
 <hr />
-</div>
-<div id="features" class="section level2">
-<h2>Features</h2>
+<div id="reasons" class="section level2">
+<h2>Reasons</h2>
 <ul>
-<li>HWID Activation</li>
-<li>KMS38 Activation</li>
-<li>Online KMS Activation</li>
-<li>Activation Troubleshoot</li>
-<li>$OEM$ Folders For Preactivation</li>
-<li>Change Windows Edition</li>
-<li>Check Windows-Office Activation Status</li>
-<li>Available in All In One &amp; Separate Files Version</li>
-<li>Fully Open Source</li>
-<li>All Files Are Transparent Batch Scripts</li>
-<li>Fewer Antivirus Detections</li>
+<li><p>Office Click-to-Run builds (since February 2021) that are
+activated with KMS check the existence of the KMS server name in the
+registry. If the KMS server is not present, a banner is shown in Office
+programs notifying that “Office isn’t licensed properly”</p></li>
+<li><p>In the case of 32-bit Office installed on 64-bit Windows, Office
+checks the KMS server existence in the corresponding WOW6432Node
+registry key as well.</p></li>
+<li><p>Apart from this, they also detect if a registered KMS server is
+on their blacklist or not. As far as I know, the below 3 addresses are
+blacklisted.</p>
+<p><code>km-s8.MSG-uides.com</code> <code>km-s9.MSG-uides.com</code>
+<code>0.0.0.0</code>(Remove hyphen)<br />
+The first two are public KMS servers and the last one in simple words is
+neither public nor private IP.</p></li>
+<li><p>Please note that these checks are not performed by Office if the
+proper installation of the Volume version of Office is done with
+Perpetual2019 / 2021 VL channel.</p></li>
 </ul>
 <hr />
 </div>
-<div id="mas-latest-release" class="section level2">
-<h2>MAS Latest Release</h2>
-<p>Last Release - v1.8 (16-Mar-2023)<br />
-<a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts">GitHub</a>
-/ <a
-href="https://gitlab.com/massgrave/microsoft-activation-scripts">GitLab</a></p>
+<div id="solutions" class="section level2">
+<h2>Solutions:</h2>
+<p>Please find below various ways you can avoid this banner. The
+simplest option for you is to just use an Office activation tool
+mentioned here.</p>
+<hr />
+<div id="activation-tools" class="section level3">
+<h3>1- Activation Tools</h3>
+<ul>
+<li>Use the latest abbodi1406’s <a
+href="https://github.com/abbodi1406/KMS_VL_ALL_AIO/">KMS_VL_ALL</a> or
+<a href="index.html">MAS</a> to activate Office.</li>
+</ul>
 <hr />
 </div>
-<div id="download-how-to-use-it" class="section level2">
-<h2>Download / How to use it?</h2>
-<div id="method-1---powershell" class="section level3">
-<h3>Method 1 - PowerShell</h3>
-<p>(Recommended)</p>
+<div id="manual-activation" class="section level3">
+<h3>2- Manual Activation</h3>
+<p>In this section, I’m only going to mention how to set up the KMS
+server in the registry properly.</p>
 <ul>
-<li>On Windows 8.1/10/11, right-click on the windows start menu and
-select PowerShell or Terminal (Not CMD).</li>
-<li>Copy-paste the below code and press enter<br />
-<code>irm https://massgrave.dev/get | iex</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
+<li><p><strong>If using Public KMS server:</strong><br />
+Since they can put any public KMS server on the blacklist, as a
+permanent solution, we can instead use server IP instead of
+hostname.</p></li>
+<li><p><strong>If using private KMS server IP:<br />
+</strong>Make sure to use a valid private IP address.</p></li>
+</ul>
+<p>Please find below how to set the KMS server address in the registry.
+For example with a private IP <code>10.0.0.10</code></p>
+<pre><code>reg delete &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\0ff1ce15-a989-479d-af46-f275c6370663&quot; /f
+
+reg delete &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\0ff1ce15-a989-479d-af46-f275c6370663&quot; /f /reg:32
+
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform&quot; /f /v KeyManagementServiceName /t REG_SZ /d &quot;10.0.0.10&quot;
+
+reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform&quot; /f /v KeyManagementServiceName /t REG_SZ /d &quot;10.0.0.10&quot; /reg:32</code></pre>
+<hr />
+</div>
+<div id="install-vl-office" class="section level3">
+<h3>3- Install VL Office</h3>
+<p>As mentioned in the reasons section, these checks are performed only
+if Retail Office is installed and later converted to VL. The office
+doesn’t perform any such checks if the proper installation of the VL
+office is done.</p>
+<p>Please the guide <a href="office_c2r_custom.html">here</a> for VL
+Office installation.</p>
+<hr />
+</div>
+<div id="change-update-channel" class="section level3">
+<h3>4- Change Update Channel</h3>
+<ul>
+<li><p>If we change the Insider or Current update channel
+<strong>to</strong> Monthly Enterprise or Semi-Annual channel then such
+non-genuine banners won’t appear by default.</p></li>
+<li><p>Before doing this, make sure your Office update channel is either
+Insider or Current.</p></li>
+<li><p>Make sure the Internet is connected</p></li>
+<li><p>Open command prompt as admin and enter below lines and press
+enter,</p></li>
+</ul>
+<!-- -->
+<pre><code>reg add HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v CDNBaseUrl /t REG_SZ /d &quot;http://officecdn.microsoft.com/pr/55336B82-A18D-4DD6-B5F6-9E5095C314A6&quot; /f
+
+reg delete HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v UpdateUrl /f
+
+reg delete HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v UpdateToVersion /f
+
+reg delete HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Updates /v UpdateToVersion /f
+
+reg delete HKLM\SOFTWARE\Policies\Microsoft\Office\16.0\Common\OfficeUpdate\ /f
+
+&quot;%CommonProgramFiles%\microsoft shared\ClickToRun\OfficeC2RClient.exe&quot; /update user</code></pre>
+<ul>
+<li><p>It will change the update channel to Production::MEC |
+MonthlyEnterprise</p></li>
+<li><p>Make sure Office starts updating with the last command.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="report-an-issue" class="section level2">
+<h2>Report an issue</h2>
+<ul>
+<li>Check <a href="troubleshoot.html">here</a>.</li>
 </ul>
 </div>
-<div id="method-2---traditional" class="section level3">
-<h3>Method 2 - Traditional</h3>
-<ul>
-<li>Download the file from <a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip">here</a></li>
-<li>Right click on the downloaded zip file and extract</li>
-<li>In the extracted folder, find the folder named
-<code>All-In-One-Version</code></li>
-<li>Run the file named <code>MAS_AIO.cmd</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
-</ul>
-<p>To run the scripts in unattended mode, check <a
-href="command_line_switches.html">here</a></p>
-<hr />
-</div>
-</div>
-<div id="activations-summary" class="section level2">
-<h2>Activations Summary</h2>
-<table>
-<colgroup>
-<col width="19%" />
-<col width="25%" />
-<col width="55%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Activation Type</th>
-<th align="left">Supported Product</th>
-<th align="left">Activation Period</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">HWID</td>
-<td align="left">Windows 10-11</td>
-<td align="left">Permanent</td>
-</tr>
-<tr class="even">
-<td align="left">KMS38</td>
-<td align="left">Windows 10-11-Server</td>
-<td align="left">Until the year 2038</td>
-</tr>
-<tr class="odd">
-<td align="left">Online KMS</td>
-<td align="left">Windows / Office</td>
-<td align="left">180 Days. Lifetime Activation With Renewal Task</td>
-</tr>
-</tbody>
-</table>
-<p>For more details, use the respective activation details in Doc.</p>
-<p>To activate unsupported products such as <strong>Office on
-Mac</strong>, check <a
-href="unsupported_products_activation.html">here</a>.</p>
-<hr />
-</div>
-<div id="screenshots" class="section level2">
-<h2>Screenshots</h2>
-<p><img src="MAS_AIO.png" /></p>
-<p><img src="MAS_HWID.png" /></p>
-<p><img src="MAS_KMS.png" /></p>
-<p><img src="MAS_Troubleshoot.png" /></p>
-<hr />
-<p>Made with Love ❤️</p>
 </div>
 
 <script type="text/javascript" src="links.js"></script>

@@ -11,7 +11,7 @@
 
 
 
-<title>Microsoft Activation Scripts</title>
+<title>OEM Folders</title>
 
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -405,120 +405,103 @@ div.tocify {
 </div>
 
 
-<div id="intro" class="section level2">
-<h2>Intro</h2>
-<p><strong>Microsoft Activation Scripts (MAS)</strong></p>
-<p>A Windows and Office activator using HWID / KMS38 / Online KMS
-activation methods, with a focus on open-source code and fewer antivirus
-detections.</p>
+<div id="oem-folders" class="section level1">
+<h1>$OEM$ Folders</h1>
+<p>(Windows Pre-Activation)</p>
 <hr />
-</div>
-<div id="features" class="section level2">
-<h2>Features</h2>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
 <ul>
-<li>HWID Activation</li>
-<li>KMS38 Activation</li>
-<li>Online KMS Activation</li>
-<li>Activation Troubleshoot</li>
-<li>$OEM$ Folders For Preactivation</li>
-<li>Change Windows Edition</li>
-<li>Check Windows-Office Activation Status</li>
-<li>Available in All In One &amp; Separate Files Version</li>
-<li>Fully Open Source</li>
-<li>All Files Are Transparent Batch Scripts</li>
-<li>Fewer Antivirus Detections</li>
+<li><p>To create a pre-activated Windows installation .iso, do the
+following things:</p></li>
+<li><p>Extract <code>$OEM$</code> folder to the desktop using the MAS
+script.</p></li>
+<li><p>Copy the <code>$OEM$</code> folder to the <code>sources</code>
+folder in the Windows installation media (.iso or USB).</p></li>
+<li><p>The directory will appear like this: <code>\sources\$OEM$</code>
+in your altered .iso or on your bootable USB drive.</p></li>
+<li><p>Now use this .iso or bootable USB drive to install Windows and it
+will either already be activated (KMS38) as soon as it boots or will
+self-activate (HWID or Online KMS) at the first internet
+contact.</p></li>
+<li><p>You can check <a href="index.html">here</a> about activation
+method details and select the activation method as per your
+requirement.</p></li>
+<li><p>On Windows 8 and later, running setupcomplete.cmd is disabled if
+the default installed key for the edition is OEM Channel. For example -
+Preactivation won’t work for Windows 10 Iot Enterprise because installed
+key is of OEM channel.</p></li>
 </ul>
 <hr />
 </div>
-<div id="mas-latest-release" class="section level2">
-<h2>MAS Latest Release</h2>
-<p>Last Release - v1.8 (16-Mar-2023)<br />
-<a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts">GitHub</a>
-/ <a
-href="https://gitlab.com/massgrave/microsoft-activation-scripts">GitLab</a></p>
+<div id="kms38---server-coracor" class="section level2">
+<h2>KMS38 - Server Cor/Acor</h2>
+<ul>
+<li><p>Windows Server Cor/Acor (No GUI) editions don’t have
+<code>clipup.exe</code> file.</p></li>
+<li><p>To KMS38 activate it, you need to download
+<code>ClipUp.exe</code> file from <a
+href="https://www.box.com/index.php?rm=box_download_shared_file&amp;shared_name=qrmkewit9ty6ah0qzk0vncyyrwo8hei9&amp;file_id=f_747809716860">this
+link</a>.<br />
+<br />
+<code>File: ClipUp.exe</code><br />
+<code>SHA-256: 0d6e9f6bbd0321eda149658d96040cb4f79e0bd93ba60061f25b28fecbf4d4ef</code><br />
+<br />
+This file has digital signatures which can be verified. You can also get
+this file from official <a
+href="https://download.microsoft.com/download/1/6/F/16FA20E6-4662-482A-920B-1A45CF5AAE3C/14393.0.160715-1616.RS1_RELEASE_SERVER_EVAL_X64FRE_EN-US.ISO">Windows
+Server 2016 x64 RTM ISO</a>.</p></li>
+<li><p>Put the <code>ClipUp.exe</code> beside the KMS38 Activation
+script. That would be either <code>MAS_AIO.cmd</code> or
+<code>KMS38_Activation.cmd</code></p></li>
+<li><p>Activation script will check <code>ClipUp.exe</code> in the
+current folder (from where script is running) and will use it
+accordingly.</p></li>
+</ul>
 <hr />
 </div>
-<div id="download-how-to-use-it" class="section level2">
-<h2>Download / How to use it?</h2>
-<div id="method-1---powershell" class="section level3">
-<h3>Method 1 - PowerShell</h3>
-<p>(Recommended)</p>
+<div id="hwid" class="section level2">
+<h2>HWID</h2>
 <ul>
-<li>On Windows 8.1/10/11, right-click on the windows start menu and
-select PowerShell or Terminal (Not CMD).</li>
-<li>Copy-paste the below code and press enter<br />
-<code>irm https://massgrave.dev/get | iex</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
+<li>When using HWID activation, no files are stored on the system, and
+Windows 10-11 will be activated when connected to the internet for the
+first time.</li>
+</ul>
+<hr />
+</div>
+<div id="kms38" class="section level2">
+<h2>KMS38</h2>
+<ul>
+<li>When using KMS38 activation, no files are stored on the system, and
+Windows 10-11-Server becomes activated immediately without
+Internet.</li>
+</ul>
+<hr />
+</div>
+<div id="online-kms" class="section level2">
+<h2>Online KMS</h2>
+<ul>
+<li>When using Online KMS activation, Windows and Office both will be
+activated when connected to the internet for the first time. This option
+uses a renewal task for lifetime activation.</li>
+</ul>
+<hr />
+</div>
+<div id="hwid-online-kms" class="section level2">
+<h2>HWID + Online KMS</h2>
+<ul>
+<li>In this method, Windows 10-11 will be activated with HWID, and
+<strong>Office</strong> will be activated using Online KMS.</li>
+</ul>
+<hr />
+</div>
+<div id="kms38-online-kms" class="section level2">
+<h2>KMS38 + Online KMS</h2>
+<ul>
+<li>In this method, Windows 10-11-Server will be activated with KMS38,
+and <strong>Office</strong> will be activated using Online KMS.</li>
 </ul>
 </div>
-<div id="method-2---traditional" class="section level3">
-<h3>Method 2 - Traditional</h3>
-<ul>
-<li>Download the file from <a
-href="https://github.com/massgravel/Microsoft-Activation-Scripts/archive/refs/heads/master.zip">here</a></li>
-<li>Right click on the downloaded zip file and extract</li>
-<li>In the extracted folder, find the folder named
-<code>All-In-One-Version</code></li>
-<li>Run the file named <code>MAS_AIO.cmd</code></li>
-<li>You will see the activation options, and follow onscreen
-instructions.</li>
-<li>That’s all.</li>
-</ul>
-<p>To run the scripts in unattended mode, check <a
-href="command_line_switches.html">here</a></p>
-<hr />
-</div>
-</div>
-<div id="activations-summary" class="section level2">
-<h2>Activations Summary</h2>
-<table>
-<colgroup>
-<col width="19%" />
-<col width="25%" />
-<col width="55%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Activation Type</th>
-<th align="left">Supported Product</th>
-<th align="left">Activation Period</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">HWID</td>
-<td align="left">Windows 10-11</td>
-<td align="left">Permanent</td>
-</tr>
-<tr class="even">
-<td align="left">KMS38</td>
-<td align="left">Windows 10-11-Server</td>
-<td align="left">Until the year 2038</td>
-</tr>
-<tr class="odd">
-<td align="left">Online KMS</td>
-<td align="left">Windows / Office</td>
-<td align="left">180 Days. Lifetime Activation With Renewal Task</td>
-</tr>
-</tbody>
-</table>
-<p>For more details, use the respective activation details in Doc.</p>
-<p>To activate unsupported products such as <strong>Office on
-Mac</strong>, check <a
-href="unsupported_products_activation.html">here</a>.</p>
-<hr />
-</div>
-<div id="screenshots" class="section level2">
-<h2>Screenshots</h2>
-<p><img src="MAS_AIO.png" /></p>
-<p><img src="MAS_HWID.png" /></p>
-<p><img src="MAS_KMS.png" /></p>
-<p><img src="MAS_Troubleshoot.png" /></p>
-<hr />
-<p>Made with Love ❤️</p>
 </div>
 
 <script type="text/javascript" src="links.js"></script>
