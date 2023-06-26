@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .floating-element {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f1f1f1;
+      padding: 20px;
+      z-index: 2; /* Aumentar a posição de empilhamento */
+    }
+  </style>
+</head>
+<body>
+  <h1>Página Principal</h1>
+  
+  <div id="menuContainer"></div> <!-- Container para o menu -->
+  
+  <script>
+    // Função para carregar o menu a partir de um arquivo
+    function loadMenu() {
+      var menuContainer = document.getElementById("menuContainer");
+      
+      // Realiza a requisição HTTP para buscar o conteúdo do arquivo
+      fetch("menu.html")
+        .then(response => response.text())
+        .then(data => {
+          // Insere o conteúdo do arquivo na div menuContainer
+          menuContainer.innerHTML = data;
+        })
+        .catch(error => {
+          console.error("Erro ao carregar o menu:", error);
+        });
+    }
+    
+    // Chama a função para carregar o menu
+    loadMenu();
+  </script>
+</body>
+</html>
