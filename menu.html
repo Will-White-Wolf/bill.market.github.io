@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" /> <!-- Modo de compatibilidade do Internet Explorer, "IE=EDGE" instrui o Internet Explorer a usar o modo de exibição mais recente disponível -->
+
+
+<title>Menu</title>
+
+
+<!-- Bibliotecas -->
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script> <!-- js dos dropdown da brra de menu -->
+<meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Para se ajustar a tela --> 
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" /> <!-- Biblioteca - Estilos da brra de menu -->
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script> <!-- Biblioteca - Dropdown da brra de menu -->
+<!-- Bibliotecas /-->
+
+<!-- Estilos -->
+<link rel="stylesheet" href="styles.css" type="text/css" /> <!-- Estolos dos texto da página -->
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+<!-- Estilos /-->
+</head>
+
+
+<body>
+	<!-- Bara de nenu -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="index.html">William Silva Dev</a>
+	</div>
+	<div id="navbar" class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+		
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a href="index.html">Home</a>
+			</li>
+			<li>
+				<a href="faq.html">FAQ</a>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Documentações					 
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" role="menu">
+					<li>
+						<a href="modelo.html">Monetizar aplicativo VBA</a>
+					</li>
+					<li>
+						<a href="modelo.html">Layout para site pessoal</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="changelog.html">Log de atualizações</a>
+					</li>
+					<li>
+						<a href="credits.html">Créditos</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="contactus.html">Contato</a>
+			</li>
+		</ul>
+	<!-- Bara de nenu -->
+	</div><!-- /.nav-collapse (colapso da navegação)-->
+</body>
+</html>
