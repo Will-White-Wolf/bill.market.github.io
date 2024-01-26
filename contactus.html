@@ -1,331 +1,173 @@
 <!DOCTYPE html>
+<html lang="pt-br">
 
-<html>
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
 
+  <title>Contate-nos</title>
 
-<title>Contact Us</title>
-
-
-<!-- Bibliotecas -->
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<!-- Bibliotecas /-->
-
-<!-- Estilos -->
-<link rel="shortcut icon" href="favicon.ico">
-
-<style>
-	h1 {font-size: 34px;}
-	h1.title {font-size: 38px;}
-	h2 {font-size: 30px;}
-	h3 {font-size: 24px;}
-	h4 {font-size: 18px;}
-	h5 {font-size: 16px;}
-	h6 {font-size: 12px;}
-	code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-	pre:not([class]) { background-color: white }
-</style>
-
-<style type="text/css">
-	code{white-space: pre-wrap;}
-	span.smallcaps{font-variant: small-caps;}
-	span.underline{text-decoration: underline;}
-	div.column{display: inline-block; vertical-align: top; width: 50%;}
-	div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-	ul.task-list{list-style: none;}
-</style>
-
-<link rel="stylesheet" href="styles.css" type="text/css" />
-
-<script type="text/javascript">
-// gerenciar o estado ativo do menu com base na página atual
-$(document).ready(function () {
-  // âncora de menu ativo
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // marque o link da âncora como ativo (e se estiver em uma lista suspensa, marque-o também como ativo)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Ajustes da barra de navegação
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // posição de rolagem deslocada para links de âncora (para barra de navegação fixa)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- conjuntos de guias -->
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-<!-- conjuntos de guias /-->
-
-<!-- dobramento de código -->
-<style type="text/css">
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-</style>
-<!-- dobramento de código /-->
+  <style>
+    body {
+      /* Oculta o corpo enquanto o head está sendo carregado */
+      display: none;
+    }
+  </style>
 </head>
 
-
 <body>
-<div class="container-fluid main-container">
-	<!-- configurar grade 3col/9col para toc_float e conteúdo principal  -->
-	<div class="row">
-		<div class="col-xs-12 col-sm-4 col-md-3">
-			<div id="TOC" class="tocify"></div>
-		</div>
+  <div class="container-fluid main-container">
+    <!-- configurar grade 3col/9col para toc_float e conteúdo principal  -->
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <div id="TOC" class="tocify"></div>
+      </div>
 
-		<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-			<!-- Bara de nenu -->
-			<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-				<div id="menuContainer" class="container"></div> <!-- Container para o menu -->
-				<script>
-					// Função para carregar o menu a partir de um arquivo
-					function loadMenu() {
-					  var menuContainer = document.getElementById("menuContainer");
-					  
-					  // Realiza a requisição HTTP para buscar o conteúdo do arquivo
-					  fetch("menu.html")
-						.then(response => response.text())
-						.then(data => {
-						  // Insere o conteúdo do arquivo na div menuContainer
-						  menuContainer.innerHTML = data;
-						})
-						.catch(error => {
-						  console.error("Erro ao carregar o menu:", error);
-						});
-					}
+      <div class="toc-content col-xs-12 col-sm-8 col-md-9">
+        <!-- Bara de nenu -->
+        <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+          <div id="menuContainer" class="container"></div> <!-- Container para o menu -->
+          <script>
+            // Função para carregar o menu a partir de um arquivo
+            function loadMenu() {
+              var menuContainer = document.getElementById("menuContainer");
 
-					// Chama a função para carregar o menu
-					loadMenu();
-				</script>
-			</div>
-			<!-- Bara de nenu /-->
-			
-			<div id="header"></div>
+              // Realiza a requisição HTTP para buscar o conteúdo do arquivo
+              fetch("menu.html")
+                .then(response => response.text())
+                .then(data => {
+                  // Insere o conteúdo do arquivo na div menuContainer
+                  menuContainer.innerHTML = data;
+                })
+                .catch(error => {
+                  console.error("Erro ao carregar o menu:", error);
+                });
+            }
 
-			<!-- Corpo -->
-			<div id="contact-us" class="section level1">
-				<h1>Contate-nos</h1>
-				<hr />
-				<p>Sinta-se à vontade para compartilhar comentários sobre relatórios de bugs, erros de documentação, solução de problemas, sugestões e etc.</p>
-				<p>
-					<a href="https://t.me/Will_White_Wolf"><img src="https://web.telegram.org/k/assets/img/favicon.ico" style="max-width: 60px; height: auto;" /></a>					
-					<a href="https://instagram.com/will.white.wolf?igshid=MzNlNGNkZWQ4Mg=="><img src="https://static.cdninstagram.com/rsrc.php/yS/r/f_5NUHW7AZC.ico" style="max-width: 60px; height: auto;" /></a>
-					<a href="mailto:william.silva.egm+github@gmail.com" target="_blank" rel="noopener noreferrer"><img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" style="max-width: 60px; height: auto;" /></a>
-				</p>
-				<hr />
-			</div>	
-			
-			<script type="text/javascript" src="links.js"></script> <!-- Abrir links externos em uma nova guia -->			
-			<!-- Corpo /-->
-		</div>
-	</div>
-</div>
+            // Chama a função para carregar o menu
+            loadMenu();
+          </script>
+        </div>
+        <!-- Bara de nenu /-->
 
-<!-- estilos de tabela bootstrap -->
-<script>
-// adicionar estilos de tabela bootstrap a tabelas pandoc
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-</script>
-<!-- estilos de tabela bootstrap /-->
+        <div id="header"></div>
 
-<!-- conjuntos de guias -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
+        <!-- Corpo -->
+        <div id="contact-us" class="section level1">
+          <h1>Contate-nos</h1>
+          <hr />
+          <p>Fique à vontade para compartilhar feedback sobre relatórios de bugs, correções de documentação, resolução de problemas, sugestões, ou qualquer outra observação que possa contribuir para a melhoria contínua. Seu retorno é valioso para nós!</p>
+          <ul>
+            <li>
+              <a href="https://t.me/Will_White_Wolf"><img src="https://web.telegram.org/k/assets/img/favicon.ico" style="max-width: 60px; height: auto;" /> - Telegram</a>
+              <hr>
+            </li>
+            <li>
+              <a href="https://instagram.com/will.white.wolf?igshid=MzNlNGNkZWQ4Mg=="><img src="https://static.cdninstagram.com/rsrc.php/yS/r/f_5NUHW7AZC.ico" style="max-width: 60px; height: auto;" /> - Instagram</a>
+              <hr>
+            </li>
+            <li>
+              <a href="mailto:william.silva.egm+github@gmail.com" target="_blank" rel="noopener noreferrer"><img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" style="max-width: 60px; height: auto;" /> - william.silva.egm+github@gmail.com</a>
+            </li>
+          </ul>
+          <hr />
+        </div>
 
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-<!-- conjuntos de guias /-->
+        <script type="text/javascript" src="links.js"></script>
+        <!-- Corpo /-->
+      </div>
+    </div>
+  </div>
 
-<!-- dobramento de código -->
-<script>
-$(document).ready(function ()  {
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+  <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+  <script src="site_libs/navigation-1.1/tabsets.js"></script>
 
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
+  <!-- estilos de tabela bootstrap -->
+  <script>
+    // adicionar estilos de tabela bootstrap a tabelas pandoc
+    function bootstrapStylePandocTables() {
+      $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+    }
+    $(document).ready(function () {
+      bootstrapStylePandocTables();
+    });
+  </script>
+  <!-- estilos de tabela bootstrap /-->
 
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
+  <!-- conjuntos de guias -->
+  <script>
+    $(document).ready(function () {
+      window.buildTabsets("TOC");
+    });
+
+    $(document).ready(function () {
+      $('.tabset-dropdown > .nav-tabs > li').click(function () {
+        $(this).parent().toggleClass('nav-tabs-open');
+      });
+    });
+  </script>
+  <!-- conjuntos de guias /-->
+
+  <!-- dobramento de código -->
+  <script>
+    $(document).ready(function () {
+
+      // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+      $('.unlisted.unnumbered').addClass('toc-ignore')
+
+      // move toc-ignore selectors from section div to header
+      $('div.section.toc-ignore')
         .removeClass('toc-ignore')
         .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
 
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = false;
+      // establish options
+      var options = {
+        selectors: "h1,h2,h3",
+        theme: "bootstrap3",
+        context: '.toc-content',
+        hashGenerator: function (text) {
+          return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        },
+        ignoreSelector: ".toc-ignore",
+        scrollTo: 0
+      };
+      options.showAndHide = false;
+      options.smoothScroll = false;
 
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-<!-- dobramento de código /-->
+      // tocify
+      var toc = $("#TOC").tocify(options).data("toc-tocify");
+    });
+  </script>
+  <!-- dobramento de código /-->
 
-<!-- carregue dinamicamente o mathjax para compatibilidade self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-<!-- carregue dinamicamente o mathjax para compatibilidade self-contained -->
+  <!-- carregue dinamicamente o mathjax para compatibilidade self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  <!-- carregue dinamicamente o mathjax para compatibilidade self-contained -->
+
+  <script>
+    // Carrega dinamicamente o conteúdo do head.html
+    $(document).ready(function () {
+      $.ajax({
+        url: 'head.html',
+        dataType: 'html',
+        success: function (data) {
+          $('head').append(data);
+
+          // Exibe o corpo após o carregamento do head
+          $('body').css('display', 'block');
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
