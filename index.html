@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-br">
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
 
   <title>William Silva Dev</title>
-  <link rel="shortcut icon" href="favicon.ico">
 
-  
-  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-  <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
-  <script src="site_libs/navigation-1.1/tabsets.js"></script>
+  <style>
+    body {
+      /* Oculta o corpo enquanto o head está sendo carregado */
+      display: none;
+    }
+  </style>
 </head>
-
 
 <body>
   <div class="container-fluid main-container">
@@ -57,8 +54,7 @@
 
         <!-- Corpo -->
         <div id="intro" class="section level2">
-          <h2>Introdução</h2>
-          <p><strong>William Slva Dev</strong></p>
+          <h2>William Slva Dev</h2>
           <p>Um site para todos os projetos do desenvolvedor William Silva.</p>
           <hr />
         </div>
@@ -73,7 +69,7 @@
         <div id="mas-latest-release" class="section level2">
           <h2>Projeto mais recente</h2>
           <p>Ativador VBA App - v1.0 (31-Mai-2023)<br />
-            <a href="https://">GitHub</a>
+            <a href="https://github.com/WilliamSilvaDev/Ativador_VBA">GitHub</a>
             / <a href="https://">GitLab</a>
           </p>
           <hr />
@@ -107,18 +103,10 @@
     </div>
   </div>
 
-  <script>
-    // Carrega dinamicamente o conteúdo do head.html
-    $(document).ready(function () {
-      $.ajax({
-        url: 'head.html',
-        dataType: 'html',
-        success: function (data) {
-          $('head').append(data);
-        }
-      });
-    });
-  </script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+  <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+  <script src="site_libs/navigation-1.1/tabsets.js"></script>
 
   <!-- estilos de tabela bootstrap -->
   <script>
@@ -188,6 +176,22 @@
     })();
   </script>
   <!-- carregue dinamicamente o mathjax para compatibilidade self-contained -->
+
+  <script>
+    // Carrega dinamicamente o conteúdo do head.html
+    $(document).ready(function () {
+      $.ajax({
+        url: 'head.html',
+        dataType: 'html',
+        success: function (data) {
+          $('head').append(data);
+
+          // Exibe o corpo após o carregamento do head
+          $('body').css('display', 'block');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

@@ -7,21 +7,21 @@
  * adapted by Ruben Arslan to activate parent tabs too
  * http://www.aidanlister.com/2014/03/persisting-the-tab-state-in-bootstrap/
  */
-(function($) {
+(function ($) {
   "use strict";
-  $.fn.rmarkdownStickyTabs = function() {
+  $.fn.rmarkdownStickyTabs = function () {
     var context = this;
     // Show the tab corresponding with the hash in the URL, or the first tab
-    var showStuffFromHash = function() {
+    var showStuffFromHash = function () {
       var hash = window.location.hash;
       var selector = hash ? 'a[href="' + hash + '"]' : 'li.active > a';
       var $selector = $(selector, context);
-      if($selector.data('toggle') === "tab") {
+      if ($selector.data('toggle') === "tab") {
         $selector.tab('show');
         // walk up the ancestors of this element, show any hidden tabs
-        $selector.parents('.section.tabset').each(function(i, elm) {
+        $selector.parents('.section.tabset').each(function (i, elm) {
           var link = $('a[href="#' + $(elm).attr('id') + '"]');
-          if(link.data('toggle') === "tab") {
+          if (link.data('toggle') === "tab") {
             link.tab("show");
           }
         });
@@ -33,12 +33,12 @@
     showStuffFromHash(context);
 
     // Set the correct tab when a user uses their back/forward button
-    $(window).on('hashchange', function() {
+    $(window).on('hashchange', function () {
       showStuffFromHash(context);
     });
 
     // Change the URL when tabs are clicked
-    $('a', context).on('click', function(e) {
+    $('a', context).on('click', function (e) {
       history.pushState(null, null, this.href);
       showStuffFromHash(context);
     });
@@ -47,7 +47,7 @@
   };
 }(jQuery));
 
-window.buildTabsets = function(tocID) {
+window.buildTabsets = function (tocID) {
 
   // build a tabset from a section div with the .tabset class
   function buildTabset(tabset) {
@@ -77,7 +77,7 @@ window.buildTabsets = function(tocID) {
 
     // build the tabset
     var activeTab = 0;
-    tabs.each(function(i) {
+    tabs.each(function (i) {
 
       // get the tab div
       var tab = $(tabs[i]);
@@ -134,7 +134,7 @@ window.buildTabsets = function(tocID) {
 
   // convert section divs with the .tabset class to tabsets
   var tabsets = $("div.section.tabset");
-  tabsets.each(function(i) {
+  tabsets.each(function (i) {
     buildTabset($(tabsets[i]));
   });
 };

@@ -3,18 +3,18 @@
  * Copyright (c) 2013 Greg Franko; Licensed MIT */
 
 // Immediately-Invoked Function Expression (IIFE) [Ben Alman Blog Post](http://benalman.com/news/2010/11/immediately-invoked-function-expression/) that calls another IIFE that contains all of the plugin logic.  I used this pattern so that anyone viewing this code would not have to scroll to the bottom of the page to view the local parameters that were passed to the main IIFE.
-(function(tocify) {
+(function (tocify) {
 
-    // ECMAScript 5 Strict Mode: [John Resig Blog Post](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/)
-    "use strict";
+  // ECMAScript 5 Strict Mode: [John Resig Blog Post](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/)
+  "use strict";
 
-    // Calls the second IIFE and locally passes in the global jQuery, window, and document objects
-    tocify(window.jQuery, window, document);
+  // Calls the second IIFE and locally passes in the global jQuery, window, and document objects
+  tocify(window.jQuery, window, document);
 
-  }
+}
 
   // Locally passes in `jQuery`, the `window` object, the `document` object, and an `undefined` variable.  The `jQuery`, `window` and `document` objects are passed in locally, to improve performance, since javascript first searches for a variable match within the local variables set before searching the global variables set.  All of the global variables are also passed in locally to be minifier friendly. `undefined` can be passed in locally, because it is not a reserved word in JavaScript.
-  (function($, window, document, undefined) {
+  (function ($, window, document, undefined) {
 
     // ECMAScript 5 Strict Mode: [John Resig Blog Post](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/)
     "use strict";
@@ -137,7 +137,7 @@
       // _Create
       // -------
       //      Constructs the plugin.  Only called once.
-      _create: function() {
+      _create: function () {
 
         var self = this;
 
@@ -152,7 +152,7 @@
         // Adds CSS classes to the newly generated table of contents HTML
         self._addCSSClasses();
 
-        self.webkit = (function() {
+        self.webkit = (function () {
 
           for (var prop in window) {
 
@@ -176,15 +176,15 @@
         self._setEventHandlers();
 
         // Binding to the Window load event to make sure the correct scrollTop is calculated
-        $(window).on("load", function() {
+        $(window).on("load", function () {
 
           // Sets the active TOC item
           self._setActiveElement(true);
 
           // Once all animations on the page are complete, this callback function will be called
-          $("html, body").promise().done(function() {
+          $("html, body").promise().done(function () {
 
-            setTimeout(function() {
+            setTimeout(function () {
 
               self.extendPageScroll = false;
 
@@ -199,7 +199,7 @@
       // _generateToc
       // ------------
       //      Generates the HTML for the dynamic table of contents
-      _generateToc: function() {
+      _generateToc: function () {
 
         // _Local variables_
 
@@ -219,7 +219,7 @@
         firstElem = [];
         var selectors = this.options.selectors.replace(/ /g, "").split(",");
         // find the first set that have at least one non-ignored element
-        for(var i = 0; i < selectors.length; i++) {
+        for (var i = 0; i < selectors.length; i++) {
           var foundSelectors = $(this.options.context).find(selectors[i]);
           for (var s = 0; s < foundSelectors.length; s++) {
             if (!$(foundSelectors[s]).is(ignoreSelector)) {
@@ -227,7 +227,7 @@
               break;
             }
           }
-          if (firstElem.length> 0)
+          if (firstElem.length > 0)
             break;
         }
 
@@ -242,7 +242,7 @@
         self.element.addClass(tocClassName);
 
         // Loops through each top level selector
-        firstElem.each(function(index) {
+        firstElem.each(function (index) {
 
           //If the element matches the ignoreSelector then we skip it
           if ($(this).is(ignoreSelector)) {
@@ -255,20 +255,20 @@
             "class": headerClassName
           }).
 
-          // Appends a top level list item HTML element to the previously created HTML header
-          append(self._nestElements($(this), index));
+            // Appends a top level list item HTML element to the previously created HTML header
+            append(self._nestElements($(this), index));
 
           // Add the created unordered list element to the HTML element calling the plugin
           self.element.append(ul);
 
           // Finds all of the HTML tags between the header and subheader elements
-          $(this).nextUntil(this.nodeName.toLowerCase()).each(function() {
+          $(this).nextUntil(this.nodeName.toLowerCase()).each(function () {
 
             // If there are no nested subheader elemements
             if ($(this).find(self.options.selectors).length === 0) {
 
               // Loops through all of the subheader elements
-              $(this).filter(self.options.selectors).each(function() {
+              $(this).filter(self.options.selectors).each(function () {
 
                 //If the element matches the ignoreSelector then we skip it
                 if ($(this).is(ignoreSelector)) {
@@ -285,7 +285,7 @@
             else {
 
               // Loops through all of the subheader elements
-              $(this).find(self.options.selectors).each(function() {
+              $(this).find(self.options.selectors).each(function () {
 
                 //If the element matches the ignoreSelector then we skip it
                 if ($(this).is(ignoreSelector)) {
@@ -304,7 +304,7 @@
 
       },
 
-      _setActiveElement: function(pageload) {
+      _setActiveElement: function (pageload) {
 
         var self = this,
 
@@ -344,11 +344,11 @@
       // _nestElements
       // -------------
       //      Helps create the table of contents list by appending nested list items
-      _nestElements: function(self, index) {
+      _nestElements: function (self, index) {
 
         var arr, item, hashValue;
 
-        arr = $.grep(this.items, function(item) {
+        arr = $.grep(this.items, function (item) {
 
           return item === self.text();
 
@@ -413,7 +413,7 @@
       // _generateHashValue
       // ------------------
       //      Generates the hash value that will be used to refer to each item.
-      _generateHashValue: function(arr, self, index) {
+      _generateHashValue: function (arr, self, index) {
 
         var hashValue = "",
           hashGeneratorOption = this.options.hashGenerator;
@@ -459,7 +459,7 @@
       // ---------------
       //      Helps create the table of contents list by appending subheader elements
 
-      _appendSubheaders: function(self, ul) {
+      _appendSubheaders: function (self, ul) {
 
         // The current element index
         var index = $(this).index(self.options.selectors),
@@ -491,17 +491,17 @@
           // Selects the last unordered list HTML found within the HTML element calling the plugin
           ul.find(itemClass).last().
 
-          // Appends an unorderedList HTML element to the dynamic `unorderedList` variable and sets a common class name
-          after($("<ul/>", {
+            // Appends an unorderedList HTML element to the dynamic `unorderedList` variable and sets a common class name
+            after($("<ul/>", {
 
-            "class": subheaderClassName,
+              "class": subheaderClassName,
 
-            "data-tag": currentTagName
+              "data-tag": currentTagName
 
-          })).next(subheaderClass).
+            })).next(subheaderClass).
 
-          // Appends a list item HTML element to the last unordered list HTML element found within the HTML element calling the plugin
-          append(self._nestElements($(this), index));
+            // Appends a list item HTML element to the last unordered list HTML element found within the HTML element calling the plugin
+            append(self._nestElements($(this), index));
         }
 
       },
@@ -509,7 +509,7 @@
       // _setEventHandlers
       // ----------------
       //      Adds jQuery event handlers to the newly generated table of contents
-      _setEventHandlers: function() {
+      _setEventHandlers: function () {
 
         // _Local variables_
 
@@ -523,7 +523,7 @@
           duration;
 
         // Event delegation that looks for any clicks on list item elements inside of the HTML element calling the plugin
-        this.element.on("click.tocify", "li", function(event) {
+        this.element.on("click.tocify", "li", function (event) {
 
           if (self.options.history) {
 
@@ -554,7 +554,7 @@
         this.element.find("li").on({
 
           // Mouseenter event handler
-          "mouseenter.tocify": function() {
+          "mouseenter.tocify": function () {
 
             // Adds a hover CSS class to the current list item
             $(this).addClass(self.hoverClass);
@@ -565,7 +565,7 @@
           },
 
           // Mouseleave event handler
-          "mouseleave.tocify": function() {
+          "mouseleave.tocify": function () {
 
             if (self.options.theme !== "bootstrap") {
 
@@ -580,10 +580,10 @@
         // only attach handler if needed (expensive in IE)
         if (self.options.extendPage || self.options.highlightOnScroll || self.options.scrollHistory || self.options.showAndHideOnScroll) {
           // Window scroll event handler
-          $(window).on("scroll.tocify", function() {
+          $(window).on("scroll.tocify", function () {
 
             // Once all animations on the page are complete, this callback function will be called
-            $("html, body").promise().done(function() {
+            $("html, body").promise().done(function () {
 
               // Local variables
 
@@ -647,7 +647,7 @@
               }
 
               // The zero timeout ensures the following code is run after the scroll events
-              setTimeout(function() {
+              setTimeout(function () {
 
                 // _Local variables_
 
@@ -663,7 +663,7 @@
                   anchorText;
 
                 // Determines the index of the closest anchor
-                anchors.each(function(idx) {
+                anchors.each(function (idx) {
                   var distance = Math.abs(($(this).next().length ? $(this).next() : $(this)).offset().top - winScrollTop - self.options.highlightOffset);
                   if (closestAnchorDistance == null || distance < closestAnchorDistance) {
                     closestAnchorDistance = distance;
@@ -717,7 +717,7 @@
       // Show
       // ----
       //      Opens the current sub-header
-      show: function(elem, scroll) {
+      show: function (elem, scroll) {
 
         // Stores the plugin context in the `self` variable
         var self = this,
@@ -752,28 +752,28 @@
 
               break;
 
-              //Uses the jQuery `show` special effect
+            //Uses the jQuery `show` special effect
             case "show":
 
               elem.show(self.options.showEffectSpeed);
 
               break;
 
-              //Uses the jQuery `slideDown` special effect
+            //Uses the jQuery `slideDown` special effect
             case "slideDown":
 
               elem.slideDown(self.options.showEffectSpeed);
 
               break;
 
-              //Uses the jQuery `fadeIn` special effect
+            //Uses the jQuery `fadeIn` special effect
             case "fadeIn":
 
               elem.fadeIn(self.options.showEffectSpeed);
 
               break;
 
-              //If none of the above options were passed, then a `jQueryUI show effect` is expected
+            //If none of the above options were passed, then a `jQueryUI show effect` is expected
             default:
 
               elem.show();
@@ -808,7 +808,7 @@
       // Hide
       // ----
       //      Closes the current sub-header
-      hide: function(elem) {
+      hide: function (elem) {
 
         // Stores the plugin context in the `self` variable
         var self = this;
@@ -823,28 +823,28 @@
 
             break;
 
-            // Uses the jQuery `hide` special effect
+          // Uses the jQuery `hide` special effect
           case "hide":
 
             elem.hide(self.options.hideEffectSpeed);
 
             break;
 
-            // Uses the jQuery `slideUp` special effect
+          // Uses the jQuery `slideUp` special effect
           case "slideUp":
 
             elem.slideUp(self.options.hideEffectSpeed);
 
             break;
 
-            // Uses the jQuery `fadeOut` special effect
+          // Uses the jQuery `fadeOut` special effect
           case "fadeOut":
 
             elem.fadeOut(self.options.hideEffectSpeed);
 
             break;
 
-            // If none of the above options were passed, then a `jqueryUI hide effect` is expected
+          // If none of the above options were passed, then a `jqueryUI hide effect` is expected
           default:
 
             elem.hide();
@@ -860,7 +860,7 @@
       // _triggerShow
       // ------------
       //      Determines what elements get shown on scroll and click
-      _triggerShow: function(elem, scroll) {
+      _triggerShow: function (elem, scroll) {
 
         var self = this;
 
@@ -888,7 +888,7 @@
       // _addCSSClasses
       // --------------
       //      Adds CSS classes to the newly generated table of contents HTML
-      _addCSSClasses: function() {
+      _addCSSClasses: function () {
 
         // If the user wants a jqueryUI theme
         if (this.options.theme === "jqueryui") {
@@ -941,7 +941,7 @@
       // setOption
       // ---------
       //      Sets a single Tocify option after the plugin is invoked
-      setOption: function() {
+      setOption: function () {
 
         // Calls the jQueryUI Widget Factory setOption method
         $.Widget.prototype._setOption.apply(this, arguments);
@@ -951,7 +951,7 @@
       // setOptions
       // ----------
       //      Sets a single or multiple Tocify options after the plugin is invoked
-      setOptions: function() {
+      setOptions: function () {
 
         // Calls the jQueryUI Widget Factory setOptions method
         $.Widget.prototype._setOptions.apply(this, arguments);
@@ -961,7 +961,7 @@
       // _scrollTo
       // ---------
       //      Scrolls to a specific element
-      _scrollTo: function(elem) {
+      _scrollTo: function (elem) {
 
         var self = this,
           duration = self.options.smoothScroll || 0,
@@ -975,7 +975,7 @@
         }
 
         // Once all animations on the page are complete, this callback function will be called
-        $("html, body").promise().done(function() {
+        $("html, body").promise().done(function () {
 
           // Animates the html and body element scrolltops
           $("html, body").animate({
